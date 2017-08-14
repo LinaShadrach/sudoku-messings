@@ -1,4 +1,5 @@
 let arr = [][];
+
 checkRow(n, x){
   let rowClear = true;
   let y = 0;
@@ -50,8 +51,8 @@ boxEmpty(){
   }
 }
 
-fillSquares(xStart, xEnd, yStart, yEnd){
-  for(n = 1; n <=  9; n++){
+fillSquares(nStart, nEndxStart, xEnd, yStart, yEnd){
+  for(n = nStart; n <=  nEnd; n++){
     for(x = xStart; x < xEnd; x++){
       for(y = yStart; y < yEnd; y++){
         if(boxEmpty && rowClear && columnClear && boxClear){
@@ -62,13 +63,20 @@ fillSquares(xStart, xEnd, yStart, yEnd){
   }
 }
 
-createPuzzle(xStart, yStart){
+fillSquaresHelper(nStart, nEnd, xStart, yStart){
   xEnd = 9;
   yEnd = 9;
   if(xStart !== 0 || yStart !== 0){
-    fillSquares(xStart, xEnd, yStart,yEnd);
+    fillSquares(nStart, nEnd, xStart, xEnd, yStart,yEnd);
     xEnd = xStart;
     yEnd = yStart;
   }
-  fillSquares(xStart, xEnd, yStart, yEnd);
+  fillSquares(nStart, nEnd, xStart, xEnd, yStart, yEnd);
+}
+
+createPuzzle(nStart, xStart, yStart){
+  fillSquaresHelper(nStart, 9, xStart, yStart)
+  if(nStart > 1){
+    fillSquaresHelper(1, nStart, xStart, yStart)
+  }
 }
