@@ -1,4 +1,4 @@
-let arr =[][];
+let arr = [][];
 checkRow(n, x){
   let rowClear = true;
   let y = 0;
@@ -41,7 +41,7 @@ checkBox(n, x, y) {
   return boxClear;
 }
 
-boxEmpty(x, y){
+boxEmpty(){
   if(arr[x,y] === 0){
     return true;
   }
@@ -50,14 +50,25 @@ boxEmpty(x, y){
   }
 }
 
-fillSquares(){
+fillSquares(xStart, xEnd, yStart, yEnd){
   for(n = 1; n <=  9; n++){
-    for(x = 0; x < 9; x++){
-      for(y = 0; y < 9; y++){
-        if(boxEmpty(x, y) && rowClear(n, x) && columnClear(n, y) && boxClear(n, x, y)){
+    for(x = xStart; x < xEnd; x++){
+      for(y = yStart; y < yEnd; y++){
+        if(boxEmpty && rowClear && columnClear && boxClear){
           arr[x,y] = n;
         }
       }
     }
   }
+}
+
+createPuzzle(xStart, yStart){
+  xEnd = 9;
+  yEnd = 9;
+  if(xStart !== 0 || yStart !== 0){
+    fillSquares(xStart, xEnd, yStart,yEnd);
+    xEnd = xStart;
+    yEnd = yStart;
+  }
+  fillSquares(xStart, xEnd, yStart, yEnd);
 }
